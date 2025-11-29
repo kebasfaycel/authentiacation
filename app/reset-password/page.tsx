@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
+import { motion } from "motion/react";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 function Reset() {
@@ -46,62 +47,69 @@ function Reset() {
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <Card className=" justify-center m-3 py-5 w-full sm:w-1/2  lg:w-1/3">
-        <div className=" flex justify-between items-center px-5">
-          <Link href={"/"}>
-            {" "}
-            <Button variant={"outline"}>
-              <House size={"20px"} />
-            </Button>
-          </Link>
-          <ModeToggle />
-        </div>
-        <div className=" flex flex-col justify-center">
-          <CardHeader className="text-center py-2">
-            <CardTitle className="text-2xl"> Reset Password</CardTitle>
-            <CardDescription>Enter a new password</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-              className="space-y-3"
-            >
-              <Input
-                type="password"
-                placeholder="Password"
-                required
-                value={form.password}
-                onChange={(e) => {
-                  setForm({ ...form, password: e.target.value });
-                }}
-              />
-              <Input
-                type="password"
-                placeholder="Confirm Password"
-                required
-                value={form.confirmPassword}
-                onChange={(e) => {
-                  setForm({ ...form, confirmPassword: e.target.value });
-                }}
-              />
-              <Button className="w-full cursor-pointer" disabled={pending}>
-                {pending ? <Spinner /> : <p> Reset Password</p>}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full sm:w-1/2  lg:w-1/3"
+      >
+        <Card className=" justify-center m-3 py-5 w-full">
+          <div className=" flex justify-between items-center px-5">
+            <Link href={"/"}>
+              {" "}
+              <Button variant={"outline"}>
+                <House size={"20px"} />
               </Button>
-            </form>
-          </CardContent>
-          <div className="flex justify-center items-center">
-            <Link
-              href="/sign-in"
-              className="text-sm mt-2 text-muted-foreground hover:text-foreground hover:underline transition-all"
-            >
-              Back to sign-in
             </Link>
+            <ModeToggle />
           </div>
-        </div>
-      </Card>
+          <div className=" flex flex-col justify-center">
+            <CardHeader className="text-center py-2">
+              <CardTitle className="text-2xl"> Reset Password</CardTitle>
+              <CardDescription>Enter a new password</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+                className="space-y-3"
+              >
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  required
+                  value={form.password}
+                  onChange={(e) => {
+                    setForm({ ...form, password: e.target.value });
+                  }}
+                />
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  required
+                  value={form.confirmPassword}
+                  onChange={(e) => {
+                    setForm({ ...form, confirmPassword: e.target.value });
+                  }}
+                />
+                <Button className="w-full cursor-pointer" disabled={pending}>
+                  {pending ? <Spinner /> : <p> Reset Password</p>}
+                </Button>
+              </form>
+            </CardContent>
+            <div className="flex justify-center items-center">
+              <Link
+                href="/sign-in"
+                className="text-sm mt-2 text-muted-foreground hover:text-foreground hover:underline transition-all"
+              >
+                Back to sign-in
+              </Link>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
     </div>
   );
 }
