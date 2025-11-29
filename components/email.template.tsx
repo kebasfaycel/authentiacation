@@ -28,14 +28,12 @@ export const ResetPasswordEmail = ({ resetLink }: ResetPasswordEmailProps) => (
         <Heading style={{ color: "#333" }}>Reset Your Password</Heading>
         <Text>If you requested a password reset, click the button below:</Text>
         <Button
-          pX={20}
-          pY={12}
           style={{
             backgroundColor: "purple",
             color: "#fff",
             textDecoration: "none",
             borderRadius: "5px",
-            padding: "5px",
+            padding: "15px",
           }}
           href={resetLink}
         >

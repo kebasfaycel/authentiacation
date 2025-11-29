@@ -13,11 +13,14 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-function SignUp() {
+function Forget() {
   const [email, setEmail] = useState("");
+  const router = useRouter();
   const [pending, setPending] = useState(false);
   const handleSubmit = async () => {
+    setPending(true);
     const res = await fetch("/api/auth/forgot", {
       method: "POST",
       headers: {
@@ -28,9 +31,11 @@ function SignUp() {
     const data = await res.json();
     if (res.ok) {
       toast.success(data.message);
+      setPending(false);
+      router.push("/sign-in")
     } else if (res.status === 404) {
       toast.error(data.message);
-      setPending(true);
+      setPending(false);
     }
   };
   return (
@@ -64,7 +69,7 @@ function SignUp() {
                 }}
               />
 
-              <Button className="w-full" disabled={pending}>
+              <Button className="w-full cursor-pointer" disabled={pending}>
                 {pending ? <Spinner /> : <p>Continue</p>}
               </Button>
             </form>
@@ -83,4 +88,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Forget;

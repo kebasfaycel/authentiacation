@@ -19,7 +19,10 @@ const handler = NextAuth({
             clientSecret: process.env.GITHUB_SECRET as string
         }),
         CredentialsProvider({
-            name: "Credentials", credentials: { email: {}, password: {} }, async authorize(credentials) {
+            name: "Credentials", credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
+            }, async authorize(credentials) {
                 try {
                     await ConnectToDatabase();
                     const user = await User.findOne({ email: credentials?.email });
@@ -40,7 +43,7 @@ const handler = NextAuth({
     ],
     callbacks: {
         async signIn({ account, profile }) {
-            if (account?.provider === "github" || "google") {
+            if (account?.provider === "github" || account?.provider === "google") {
                 await ConnectToDatabase();
                 const existingUser = await User.findOne({ email: profile?.email });
                 if (!existingUser) {

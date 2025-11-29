@@ -6,7 +6,6 @@ function page() {
   return (
     <div>
       <SessionProvider>
-        {" "}
         <User />
       </SessionProvider>
     </div>

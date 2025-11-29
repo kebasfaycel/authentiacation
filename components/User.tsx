@@ -6,13 +6,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Spinner } from "./ui/spinner";
-import { LogOut } from "lucide-react";
 function User() {
   const handleSignOut = async () => {
     await signOut({
@@ -34,9 +31,7 @@ function User() {
     <div className="flex justify-center items-center h-screen p-4">
       {session ? (
         <div className="w-full h-screen flex flex-col justify-end items-start">
-          <div className="border-2 w-full h-screen">
-
-          </div>
+          <div className=" w-full h-screen"></div>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger className="flex justify-between gap-2  items-center m-2">
               <Avatar className="size-10 bg-accent">

@@ -15,7 +15,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
-function SignUp() {
+function Reset() {
   const token = useSearchParams().get("token");
 
   interface form {
@@ -27,6 +27,7 @@ function SignUp() {
   const handleSubmit = async () => {
     const password = form.password;
     const confirmPassword = form.confirmPassword;
+    setPending(true);
     const res = await fetch("/api/auth/reset", {
       method: "POST",
       headers: {
@@ -35,11 +36,10 @@ function SignUp() {
       body: JSON.stringify({ password, confirmPassword, token }),
     });
     const data = await res.json();
-    setPending(true);
     if (res.ok) {
       toast.success(data.message);
       setPending(false);
-    } else if (res.status === 400) {
+    } else {
       toast.error(data.message);
       setPending(false);
     }
@@ -62,7 +62,13 @@ function SignUp() {
             <CardDescription>Enter a new password</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action={handleSubmit} className="space-y-3">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              className="space-y-3"
+            >
               <Input
                 type="password"
                 placeholder="Password"
@@ -81,7 +87,7 @@ function SignUp() {
                   setForm({ ...form, confirmPassword: e.target.value });
                 }}
               />
-              <Button className="w-full" disabled={pending}>
+              <Button className="w-full cursor-pointer" disabled={pending}>
                 {pending ? <Spinner /> : <p> Reset Password</p>}
               </Button>
             </form>
@@ -100,4 +106,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Reset;
