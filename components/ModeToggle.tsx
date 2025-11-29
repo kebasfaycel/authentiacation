@@ -11,7 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Separator } from "./ui/separator";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
@@ -21,12 +20,10 @@ export function ModeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
           <Sun
-            size={"20px"}
-            className=" scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+            className="absolute scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
           />
           <Moon
-            size={"20px"}
-            className="absolute  scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+            className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
           />
           <span className="sr-only">Toggle theme</span>
         </Button>

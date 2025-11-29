@@ -3,6 +3,8 @@ interface IUser extends Document {
     name: string,
     email: string,
     password?: string,
+    resetPasswordToken?: string,
+    resetPasswordExpires?: number
 }
 const UserSchema: Schema<IUser> = new mongoose.Schema({
     name: {
@@ -18,6 +20,14 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
         type: String,
         required: false
     },
+    resetPasswordToken: {
+        type: String,
+        required: false
+    },
+    resetPasswordExpires: {
+        type: Number,
+        required: false
+    }
 
 });
 const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);

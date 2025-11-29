@@ -33,23 +33,28 @@ function User() {
   return (
     <div className="flex justify-center items-center h-screen p-4">
       {session ? (
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger className="flex justify-between gap-2  items-center">
-            <Avatar className="size-10 bg-accent">
-              <AvatarImage src={session.user?.image || undefined} />
-              <AvatarFallback>{avatarFallback}</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col gap-1 items-start text-sm">
-              <span>{session.user?.name}</span>
-              <span>{session.user?.email}</span>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" side="top">
-            <DropdownMenuItem className="h-8" onClick={handleSignOut}>
-              Log Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="w-full h-screen flex flex-col justify-end items-start">
+          <div className="border-2 w-full h-screen">
+
+          </div>
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger className="flex justify-between gap-2  items-center m-2">
+              <Avatar className="size-10 bg-accent">
+                <AvatarImage src={session.user?.image || undefined} />
+                <AvatarFallback>{avatarFallback}</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col gap-1 items-start text-sm">
+                <span>{session.user?.name}</span>
+                <span>{session.user?.email}</span>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" side="top">
+              <DropdownMenuItem className="h-8" onClick={handleSignOut}>
+                Log Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       ) : (
         <div className="flex gap-2">
           <Link href={"/sign-up"}>

@@ -125,6 +125,14 @@ function SignIn() {
                     Sign up
                   </Link>
                 </p>
+                <div className="flex justify-center items-center">
+                  <Link
+                    href="/forget-password"
+                    className="text-sm mt-2 text-muted-foreground hover:text-foreground hover:underline transition-all"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
               </form>
             </CardContent>
           </div>
